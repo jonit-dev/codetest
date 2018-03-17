@@ -68,7 +68,7 @@ class HeroesTeamsController extends Controller
                 'message' => 'Your team was created successfully!'
             ]);
 
-            return view('team-create');
+            return redirect('myheroes/');
 
         } else {
             //error
@@ -78,11 +78,11 @@ class HeroesTeamsController extends Controller
                 'message' => 'Error while trying to create your new team. Please, check your form and try again!'
             ]);
 
-            return view('team-create');
+            return redirect('myheroes/');
         }
 
 
-        return view('team-create');
+        return redirect('myheroes/');
     }
 
 
@@ -129,11 +129,7 @@ class HeroesTeamsController extends Controller
 
 
 
-            //lets get all the heroes available just to load the welcome view. That's not the best way to do it (we should avoid code repetition. If I had more time, I'd create a service provider to automatically load all heroes when getting into the welcome view.
-
-            $heroes = Hero::all(); //get all heroes available for rendering the welcome view
-
-            return view('welcome', compact('heroes'));
+            return redirect('myheroes/');
 
         } else {
             $request->session()->flash('status', [
@@ -142,11 +138,7 @@ class HeroesTeamsController extends Controller
             ]);
 
 
-            //lets get all the heroes available just to load the welcome view. That's not the best way to do it (we should avoid code repetition. If I had more time, I'd create a service provider to automatically load all heroes when getting into the welcome view.
-
-            $heroes = Hero::all(); //get all heroes available for rendering the welcome view
-
-            return view('welcome', compact('heroes'));
+            return redirect('myheroes/');
         }
 
 
@@ -166,9 +158,7 @@ class HeroesTeamsController extends Controller
             'message' => 'Your hero was removed from the team!'
         ]);
 
-        $heroes = Hero::all();
-
-        return view('welcome', compact('heroes'));
+        return redirect('myheroes/');
 
     }
 

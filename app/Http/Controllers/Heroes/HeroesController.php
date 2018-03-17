@@ -77,7 +77,7 @@ class HeroesController extends Controller
                 'message' => 'Your hero was created! Now, you can save the world!'
             ]);
 
-            return view('create');
+            return redirect('myheroes/');
 
         }
 

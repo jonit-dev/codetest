@@ -15,7 +15,7 @@
                     <h1 class="mt-5">Hello @{{ name }}, create your hero to begin!</h1>
                     <p class="lead">=)</p>
 
-                    <a href="{{route('heroes-create')}}" class="btn btn-primary">Join Hero Team</a>
+                    <a href="{{route('heroes-create')}}" class="btn btn-primary">Create a Hero</a>
                     <a href="{{route('heroes-team-create')}}" class="btn btn-dark">Create a Hero Team</a>
                 </div>
             </div>
