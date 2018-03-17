@@ -25,11 +25,17 @@ Route::group(['prefix' => '/myheroes', 'namespace' => 'Heroes'], function () {
         
 });
 
-Route::group(['prefix' => '/myheroes/team', 'namespace' => 'Heroes',], function () {
+Route::group(['prefix' => '/myheroes/createteam', 'namespace' => 'Heroes',], function () {
 
     
       Route::get('/','HeroesTeamsController@create')->name('heroes-team-create');
-            
+      Route::post('/store','HeroesTeamsController@store')->name('heroes-team-store');
+
+
+      Route::get('/attach/{id}','HeroesTeamsController@attachForm')->name('heroes-team-form-attach');
+      Route::post('/attach/','HeroesTeamsController@attach')->name('heroes-team-attach');
+      Route::get('/dettach/{id}/team/{team}','HeroesTeamsController@detach')->name('heroes-team-detach');
+
  
 });
 

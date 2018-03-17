@@ -16,6 +16,8 @@
     {{--ANGULAR--}}
     <link rel="stylesheet" href="{{asset('css/angular.css')}}">
 
+    {{--FONT AWESOME--}}
+    <link rel="stylesheet" href="{{asset('build\fontawesome\web-fonts-with-css\css\fontawesome-all.css')}}">
 
 
 </head>
