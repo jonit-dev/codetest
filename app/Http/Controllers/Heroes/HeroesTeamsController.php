@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Heroes;
 
 use App\Http\Repositories\HeroesRepositoy;
+use App\Http\Repositories\TeamsRepository;
 use App\Models\Hero;
 use App\Models\Team;
 use Illuminate\Http\Request;
@@ -54,7 +55,8 @@ class HeroesTeamsController extends Controller
         $team_created = Team::create([
             'name' => request('name'),
             'side' => request('side'),
-            'size' => request('size'),
+            'max_size' => request('size'),
+            'combat_power' => 0
         ]);
 
         if ($team_created) {
@@ -98,11 +100,8 @@ class HeroesTeamsController extends Controller
     }
 
     //execute hero x team attaching
-    public function attach(Request $request, HeroesRepositoy $heroesRepositoy)
+    public function attach(Request $request, HeroesRepositoy $heroesRepository, TeamsRepository $teamsRepository)
     {
-
-
-//        dd($heroesRepositoy->checkTeamAvailable(Request('hero'),Request('team')));
 
 
         //find the selected hero
@@ -112,7 +111,7 @@ class HeroesTeamsController extends Controller
         //lets verify if the selected hero is already into the selected team
 
 
-        if ($heroesRepositoy->checkTeamAvailable(Request('hero'), Request('team'))) {
+        if ($heroesRepository->checkTeamAvailable(Request('hero'), Request('team'))) {
 
             //attach it to a team
             $hero->teams()->attach(Request('team'));
@@ -124,6 +123,12 @@ class HeroesTeamsController extends Controller
             ]);
 
 
+            //update team combat_power
+
+            $teamsRepository->updateCombatPower(Request('team'));
+
+
+
             //lets get all the heroes available just to load the welcome view. That's not the best way to do it (we should avoid code repetition. If I had more time, I'd create a service provider to automatically load all heroes when getting into the welcome view.
 
             $heroes = Hero::all(); //get all heroes available for rendering the welcome view
@@ -133,7 +138,7 @@ class HeroesTeamsController extends Controller
         } else {
             $request->session()->flash('status', [
                 'type' => 'danger',
-                'message' => 'You cannot be added again to your own team.'
+                'message' => 'You cannot be added to this team.'
             ]);
 
 
@@ -166,6 +171,9 @@ class HeroesTeamsController extends Controller
         return view('welcome', compact('heroes'));
 
     }
+
+
+
 
 
     /**

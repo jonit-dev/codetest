@@ -17,7 +17,7 @@ class CreateTeamsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('side');
-            $table->integer('size');
+            $table->integer('max_size');
             $table->integer('combat_power');
             $table->timestamps();
         });

@@ -36,6 +36,9 @@ Route::group(['prefix' => '/myheroes/createteam', 'namespace' => 'Heroes',], fun
       Route::post('/attach/','HeroesTeamsController@attach')->name('heroes-team-attach');
       Route::get('/dettach/{id}/team/{team}','HeroesTeamsController@detach')->name('heroes-team-detach');
 
+
+
+
  
 });
 

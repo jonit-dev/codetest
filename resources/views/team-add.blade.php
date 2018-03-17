@@ -28,24 +28,34 @@
                         <input type="hidden" value="{{$hero->id}}" name="hero">
 
 
-                        <div class="form-group">
-                            <label for="team-size">Team Name</label>
-                            <select class="form-control  custom-select" name="team" id="team">
 
-                                @foreach($teams as $team)
-                                    <option value="{{$team->id}}">{{$team->name}}</option>
+                        @if(count($teams) !== 0)
+                            <div class="form-group">
+                                <label for="team-size">Team Name</label>
+                                <select class="form-control  custom-select" name="team" id="team">
+
+                                    @foreach($teams as $team)
+                                        <option value="{{$team->id}}">{{$team->name}}</option>
                                     @endforeach
 
 
 
-                            </select>
-                        </div>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Attach to Selected Team</button>
+
+                            @else
+                            <p> <a href="{{route('heroes-team-create')}}">You don't have any created teams yet. Click here to create one...</a>
+                            </p>
+                            @endif
 
 
 
 
 
-                        <button type="submit" class="btn btn-primary">Attach to Selected Team</button>
+
+
                     </form>
 
 

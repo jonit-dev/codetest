@@ -26,7 +26,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <h2>Hero Team</h2>
+                <h2>Hero Teams</h2>
 
                 @include('display.error')
                 @include('display.alert')
@@ -38,10 +38,10 @@
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Side</th>
-                        <th scope="col">HitPoints</th>
-                        <th scope="col">Attack</th>
+                        <th scope="col">HP / Attack</th>
                         <th scope="col">Special Ability</th>
                         <th scope="col">Teams</th>
+                        <th scope="col">Combat Power</th>
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
@@ -51,15 +51,24 @@
                         <tr>
                             <th scope="row">{{$hero->id}}</th>
                             <td>{{$hero->name}}</td>
-                            <td>{{$hero->side}}</td>
-                            <td>{{$hero->hitpoints}}</td>
-                            <td>{{$hero->attack}}</td>
-                            <td>{{$hero->special_ability}}</td>
+                            <td>
+
+                            {{($hero->side) === 1 ? 'Light' : 'Dark'}}
+
+
+
+                            </td>
+                            <td>{{$hero->hitpoints}} / {{$hero->attack}}</td>
+                            <td>
+                                {{$hero->special_ability === 0 ? 'None' : $hero->special_ability->name}}
+                            </td>
                             @if(count($hero->teams) > 0)
                                 <td>{{$hero->teams->first()->name}}</td>
+                                <td>{{$hero->teams->first()->combat_power}}</td>
 
                                 @else
                                 <td><strong>None</strong></td>
+                                <td><strong>0</strong></td>
                                 @endif
 
                             <td>
