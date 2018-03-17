@@ -11,6 +11,26 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+  Route::get('/','Heroes\HeroesController@index')->name('heroes-index');
+  Route::get('/myheroes','Heroes\HeroesController@index')->name('heroes-index');
+
+
+
+
+Route::group(['prefix' => '/myheroes', 'namespace' => 'Heroes'], function () {
+    
+      Route::get('createhero','HeroesController@create')->name('heroes-create');
+        Route::post('createhero','HeroesController@store')->name('heroes-store');
+        
 });
+
+Route::group(['prefix' => '/myheroes/team', 'namespace' => 'Heroes',], function () {
+
+    
+      Route::get('/','HeroesTeamsController@create')->name('heroes-team-create');
+            
+ 
+});
+
+
